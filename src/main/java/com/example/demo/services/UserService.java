@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.DTO.UserDTO;
 import com.example.demo.domain.User;
 import com.example.demo.exception.ObjectNotFoundException;
 import com.example.demo.repository.UserRepository;
@@ -23,5 +24,13 @@ public class UserService {
         Optional<User> optionalUser = repository.findById(id);
         User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
         return user;
+    }
+
+    public User insert(User obj) {
+        return repository.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
